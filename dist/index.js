@@ -9,9 +9,7 @@ const submission_1 = require("./models/submission");
 const uid_1 = require("uid");
 const app = express_1.default();
 const port = 5000;
-app.use(express_1.default.json()); // for parsing application/json
-// todo: add permission checks 
-// todo: add field validation
+app.use(express_1.default.json());
 // Body parameters 
 // - userId: string 
 // - formData:{ 

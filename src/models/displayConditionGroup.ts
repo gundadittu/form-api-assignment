@@ -1,7 +1,6 @@
 import { Condition, validateCondition } from './condition'; 
 
 export type DisplayConditionGroup = { 
-    required: boolean,
     condition_list: [Condition]
 }
 
@@ -9,8 +8,6 @@ export function validateDisplayConditionGroup(arg: DisplayConditionGroup | any):
     if (!arg) { 
         return false; 
     }
-
-    const validateRequired = typeof arg.required === "boolean"; 
 
     function validateAllConditions(): boolean { 
         const conditionList = arg.condition_list; 
@@ -25,5 +22,5 @@ export function validateDisplayConditionGroup(arg: DisplayConditionGroup | any):
     }
     const validateConditionList = validateAllConditions() 
 
-    return validateRequired && validateConditionList; 
+    return validateConditionList; 
 }

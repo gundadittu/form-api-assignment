@@ -17,6 +17,8 @@ function validateField(arg) {
     const validatePlaceholder = (arg.placeholder) ? typeof arg.placeholder === "string" : true;
     const validateSingleSelectDropdownOptions = (arg.type === "single-select-dropdown") ? Array.isArray(arg.single_select_dropdown_options) : true;
     const validateDefaultValue = (arg.default_value) ? typeof arg.default_value === "string" : true;
+    const acceptedFileTypes = arg.accepted_file_types;
+    const validateAcceptedFileTypes = acceptedFileTypes ? Array.isArray(acceptedFileTypes) : true;
     function validateAllDisplayConditionGroups() {
         const conditionGroups = arg.display_condition_groups;
         if (!conditionGroups) {
@@ -29,13 +31,8 @@ function validateField(arg) {
         return filteredGroups.length === conditionGroups.length;
     }
     const validateDisplayConditionGroups = validateAllDisplayConditionGroups();
-    console.log("validateField returning: " + validateId + " " +
-        validateFormId + " " + validateType + " " + validateDisplayLabel
-        + " " + validateDisplayDescription + " " + validateDisplayHint
-        + " " + validateDefaultValue + " " + validateRequired + " " + validatePlaceholder
-        + " " + validateSingleSelectDropdownOptions + " " + validateDisplayConditionGroups);
     return validateId && validateFormId && validateType && validateDisplayLabel
-        && validateDisplayDescription && validateDisplayHint
+        && validateDisplayDescription && validateDisplayHint && validateAcceptedFileTypes
         && validateDefaultValue && validateRequired && validatePlaceholder
         && validateSingleSelectDropdownOptions && validateDisplayConditionGroups;
 }

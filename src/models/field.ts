@@ -11,6 +11,7 @@ export type Field = {
     default_value?: string,
     required: boolean,
     single_select_dropdown_options?: Array<string>,
+    accepted_file_types?: Array<string>, // Possible values = ["pdf", "word", "png", "jpeg", "ppt", "excel"]
     display_condition_groups?: Array<DisplayConditionGroup>,
 }
 
@@ -31,6 +32,8 @@ export function validateField(arg: Field | any): arg is Field {
     const validatePlaceholder = (arg.placeholder) ? typeof arg.placeholder === "string" : true;
     const validateSingleSelectDropdownOptions = (arg.type === "single-select-dropdown") ? Array.isArray(arg.single_select_dropdown_options) : true;
     const validateDefaultValue = (arg.default_value) ? typeof arg.default_value === "string" : true;
+    const acceptedFileTypes = arg.accepted_file_types; 
+    const validateAcceptedFileTypes = acceptedFileTypes ? Array.isArray(acceptedFileTypes) : true; 
 
     function validateAllDisplayConditionGroups(): boolean {
         const conditionGroups = arg.display_condition_groups;
@@ -43,16 +46,10 @@ export function validateField(arg: Field | any): arg is Field {
         const filteredGroups = conditionGroups.filter((x, _1, _2) => validateDisplayConditionGroup(x));
         return filteredGroups.length === conditionGroups.length;
     }
-    const validateDisplayConditionGroups = validateAllDisplayConditionGroups()
-
-    console.log("validateField returning: " + validateId + " " +
-        validateFormId + " " + validateType + " " + validateDisplayLabel
-        + " " + validateDisplayDescription + " " + validateDisplayHint
-        + " " + validateDefaultValue + " " + validateRequired + " " + validatePlaceholder
-        + " " + validateSingleSelectDropdownOptions + " " + validateDisplayConditionGroups)
+    const validateDisplayConditionGroups = validateAllDisplayConditionGroups();
 
     return validateId && validateFormId && validateType && validateDisplayLabel
-        && validateDisplayDescription && validateDisplayHint
+        && validateDisplayDescription && validateDisplayHint && validateAcceptedFileTypes
         && validateDefaultValue && validateRequired && validatePlaceholder
         && validateSingleSelectDropdownOptions && validateDisplayConditionGroups;
 }

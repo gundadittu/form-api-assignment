@@ -27,7 +27,7 @@ export function validateSubmission(arg: Submission | any): arg is Submission {
         const filteredFieldValues = fieldValues.filter((x, _1, _2) => validateFieldValue(x)); 
         return filteredFieldValues.length === fieldValues.length; 
     }
-    const validateFieldValues = validateAllFieldValues()
+    const validateFieldValues = validateAllFieldValues();
 
     return validateId && validateFormId
     && timestamp && validateFieldValues; 

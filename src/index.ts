@@ -7,11 +7,8 @@ import { uid } from 'uid';
 const app = express()
 const port = 5000
 
-app.use(express.json()) // for parsing application/json
+app.use(express.json());
 
-
-// todo: add permission checks 
-// todo: add field validation
 
 // Body parameters 
 // - userId: string 

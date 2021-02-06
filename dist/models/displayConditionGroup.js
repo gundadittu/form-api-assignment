@@ -6,7 +6,6 @@ function validateDisplayConditionGroup(arg) {
     if (!arg) {
         return false;
     }
-    const validateRequired = typeof arg.required === "boolean";
     function validateAllConditions() {
         const conditionList = arg.condition_list;
         if (!conditionList) {
@@ -19,7 +18,7 @@ function validateDisplayConditionGroup(arg) {
         return filteredList.length === conditionList.length;
     }
     const validateConditionList = validateAllConditions();
-    return validateRequired && validateConditionList;
+    return validateConditionList;
 }
 exports.validateDisplayConditionGroup = validateDisplayConditionGroup;
 //# sourceMappingURL=displayConditionGroup.js.map
